@@ -1,1 +1,1 @@
-made by Jared Anders Isaksen
+made by Jared Anders Isaksenquasar
