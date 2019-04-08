@@ -13,10 +13,10 @@
         </q-btn>
 
         <q-toolbar-title>
-          Quasar App
+          Fantasy Deck
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <!-- <div>Quasar v{{ $q.version }}</div> -->
       </q-toolbar>
     </q-header>
 
