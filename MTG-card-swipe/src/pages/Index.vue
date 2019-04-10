@@ -20,12 +20,12 @@
             <q-tab-panel name="login">  
               <div class="items-start">
                 <div class="text-h6 q-ma-lg">Your decks are waiting</div>
-                <q-input class="q-mb-lg" dark v-model="email" filled type="email" hint="Email" >
+                <q-input value="" class="q-mb-lg" dark v-model="email" filled type="email" hint="Email" >
                   <template v-slot:append>
                     <q-icon name="mail" />
                   </template> 
                 </q-input>
-                <q-input dark v-model="password" filled :type="isPwd ? 'password' : 'text'" hint="Password">
+                <q-input value="" dark v-model="password" filled :type="isPwd ? 'password' : 'text'" hint="Password">
                   <template v-slot:append>
                     <q-icon
                       v-slot:prepend 
@@ -35,25 +35,25 @@
                     />
                   </template>
                 </q-input>
-                <q-btn color="primary" label="Login" class="q-ma-lg" />
+                <q-btn color="primary" @click="handelClick('test2')" label="Login" class="q-ma-lg" />
               </div>
             </q-tab-panel>
 
             <q-tab-panel v-model="tab" name="singup">  
               <div class="items-start">
                 <div class="text-h6 q-mb-lg">Signup to start makeing your own fantasy deck</div>
-                <q-input class="q-mb-lg" dark v-model="email" filled type="email" hint="Email" >
+                <q-input value="" class="q-mb-lg" dark v-model="email" filled type="email" hint="Email" >
                   <template v-slot:append>
                     <q-icon name="mail" />
                   </template> 
                 </q-input>
-                <q-input class="q-mb-md" dark filled type="text" hint="Type a Password" />
-                <q-input class="" dark filled type="text" hint="Re-type the Password" />
+                <q-input value="" class="q-mb-md" dark filled type="text" hint="Type a Password" />
+                <q-input value="" class="" dark filled type="text" hint="Re-type the Password" />
                   
-                <q-btn color="primary" label="Submit" class="q-ma-lg" />
+                <q-btn color="primary" @click="handelClick('test')" label="Submit" class="q-ma-lg" />
               </div>
             </q-tab-panel>
-          
+            
           </q-tab-panels>  
         </q-card>
       </div>
@@ -61,34 +61,38 @@
   </q-page>
 </template>
 <script>
+
 export default {
   name: 'PageIndex',
   data () {
     return {
+      test: "Halla mundo",
       tab: 'login',
 
-      password: '',
       isPwd: true,
-
+      
+      password: '',
       email: '',
     }
+  },
+  methods:{
+    handelClick(i,e){
+      console.log("test", i, e)
+    }
   }
-
 }
+
 </script>
 <style lang="stylus">
   .q-page
     background #333
 
   .q-page>div
-    // position relative
-    // top -12vh
     width 80vw
     margin 0 auto
   
   .q-page>div>div
     margin 0 auto
-
 
   .q-card
     background rgba(255,0,0,0)
@@ -118,6 +122,7 @@ export default {
 
   .q-btn
     padding 0 40px
+
   .q-tab--active
     background #337;
 </style>
