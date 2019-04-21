@@ -45,7 +45,8 @@ module.exports = function (ctx) {
         'QTabPanels',
         'QTabPanel',
         'QInput',
-        'QCard'
+        'QCard',
+        'QSpinnerFacebook'
       ],
 
       directives: [
