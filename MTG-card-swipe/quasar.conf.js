@@ -46,7 +46,15 @@ module.exports = function (ctx) {
         'QTabPanel',
         'QInput',
         'QCard',
-        'QSpinnerFacebook'
+        'QCardSection',
+        'QCardActions',
+        'QImg',
+        'QSpinnerFacebook',
+        'QPageSticky',
+        'QCarousel',
+        'QCarouselControl',
+        'QCarouselSlide',
+        'QForm'
       ],
 
       directives: [
@@ -55,7 +63,8 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'Dialog'
       ]
 
       // iconSet: 'ionicons-v4'
@@ -71,7 +80,7 @@ module.exports = function (ctx) {
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
       }
     },
 
@@ -136,7 +145,7 @@ module.exports = function (ctx) {
     electron: {
       // bundler: 'builder', // or 'packager'
 
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // do something with Electron main process Webpack cfg
         // chainWebpack also available besides this extendWebpack
       },

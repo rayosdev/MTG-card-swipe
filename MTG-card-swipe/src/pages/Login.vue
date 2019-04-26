@@ -3,7 +3,7 @@
     <div class="q-pa-md">
       <div class="q-gutter-y-md" style="max-width: 600px">
         <q-card>
-          
+
           <q-tabs
             v-model="tab"
             dense
@@ -12,43 +12,44 @@
             narrow-indicator
           >
             <q-tab name="login" label="Login" />
-            <q-tab name="singup" label="Signup" />
+            <q-tab name="signup" label="Signup" />
           </q-tabs>
 
           <q-tab-panels v-model="tab" animated class="shadow-5">
+          <!-- <q-tab-panels value="" v-model="tab" class="shadow-5"> -->
 
-            <q-tab-panel name="login">  
+            <q-tab-panel name="login">
               <div class="items-start">
                 <form @submit.prevent="simulateSubmit" class="q-pa-md">
                   <div class="text-h6 q-ma-lg">Your decks are waiting</div>
-                  <q-input 
-                    value="" 
-                    class="q-mb-lg" 
-                    dark 
-                    v-model="email" 
-                    filled 
-                    type="email" 
+                  <q-input
+                    value=""
+                    class="q-mb-lg"
+                    dark
+                    v-model="email"
+                    filled
+                    type="email"
                     hint="Email"
                     ref="loginEmail"
                     :error="loginEmailError"
                     >
                     <template v-slot:append>
                       <q-icon name="mail" />
-                    </template> 
+                    </template>
                   </q-input>
-                  <q-input 
-                    value="" 
-                    dark 
-                    v-model="password" 
-                    filled 
-                    :type="isPwd ? 'password' : 'text'" 
+                  <q-input
+                    value=""
+                    dark
+                    v-model="password"
+                    filled
+                    :type="isPwd ? 'password' : 'text'"
                     hint="Password"
                     ref="loginPassword"
                     :error="loginPasswordError"
                     >
                     <template v-slot:append>
                       <q-icon
-                        v-slot:prepend 
+                        v-slot:prepend
                         :name="isPwd ? 'visibility_off' : 'visibility'"
                         class="cursor-pointer"
                         @click="isPwd = !isPwd"
@@ -57,9 +58,9 @@
                   </q-input>
                   <q-btn
                     type="submit"
-                    :loading="submitting" 
-                    color="primary" 
-                    label="Login" 
+                    :loading="submitting"
+                    color="primary"
+                    label="Login"
                     class="q-ma-lg"
                     >
                       <template v-slot:loading>
@@ -70,22 +71,74 @@
               </div>
             </q-tab-panel>
 
-            <q-tab-panel v-model="tab" name="singup">  
-              <div class="items-start">
-                <div class="text-h6 q-mb-lg">Signup to start makeing your own fantasy deck</div>
-                <q-input value="" class="q-mb-lg" dark v-model="email" filled type="email" hint="Email" >
-                  <template v-slot:append>
-                    <q-icon name="mail" />
-                  </template> 
-                </q-input>
-                <q-input value="" class="q-mb-md" dark filled type="text" hint="Type a Password" />
-                <q-input value="" class="" dark filled type="text" hint="Re-type the Password" />
-                  
-                <q-btn color="primary" @click="handelClick" label="Signup" class="q-ma-lg" />
-              </div>
+            <q-tab-panel name="signup">
+              <q-form autocomplete="off" @submit.prevent="simulateSubmit" class="q-pa-md">
+                <div class="items-start">
+                  <div class="text-h6 q-mb-lg">Signup to start makeing your own fantasy deck</div>
+                  <q-input
+                    clearable
+                    value=""
+                    class="q-mb-lg"
+                    dark
+                    v-model="signup.email"
+                    filled
+                    type="email"
+                    hint="Email"
+                    >
+                    <template v-slot:append>
+                      <q-icon name="mail" />
+                    </template>
+                  </q-input>
+                  <q-input
+                    value=""
+                    dark
+                    v-model="signup.password"
+                    filled
+                    :type="isPwd ? 'password' : 'text'"
+                    hint="Type Password"
+                    ref="loginPassword"
+                    :error="loginPasswordError"
+                    >
+                    <template v-slot:append>
+                      <q-icon
+                        v-slot:prepend
+                        :name="isPwd ? 'visibility_off' : 'visibility'"
+                        class="cursor-pointer"
+                        @click="isPwd = !isPwd"
+                      />
+                    </template>
+                  </q-input>
+                  <q-input
+                    value=""
+                    dark
+                    v-model="signup.repassword"
+                    filled
+                    :type="isPwd ? 'password' : 'text'"
+                    hint="Re-type the Password" 
+                    ref="loginPassword"
+                    :error="loginPasswordError"
+                    >
+                    <template v-slot:append>
+                      <!-- <q-icon
+                        v-slot:prepend
+                        :name="isPwd ? 'visibility_off' : 'visibility'"
+                        class="cursor-pointer"
+                        @click="isPwd = !isPwd"
+                      /> -->
+                    </template>
+                  </q-input>
+
+                  <q-btn 
+                    color="primary" 
+                    @click="handelClick" 
+                    label="Signup" 
+                    class="q-ma-lg" 
+                    />
+                </div>
+              </q-form>
             </q-tab-panel>
-            
-          </q-tab-panels>  
+
+          </q-tab-panels>
         </q-card>
       </div>
     </div>
@@ -98,12 +151,19 @@ export default {
   data () {
     return {
       test: "Halla mundo",
-      tab: 'login',
+      tab: 'signup',
 
       isPwd: true,
-      
-      password: '',
+
       email: '',
+      password: '',
+
+      signup:{
+        email:'',
+        password:'',
+        repassword:'',
+      },
+      // signUpEmail:'',
 
       submitting: false,
 
@@ -113,22 +173,17 @@ export default {
   },
   methods:{
     handelClick(e){
-      console.log(e)
-      console.log(localStorage.getItem('user'))
+
     },
     simulateSubmit () {
       this.submitting = true
 
-
-      console.log(localStorage.getItem('email'))
-      // console.log(localStorage.getItem('password'))'
       if(localStorage.getItem('password') != this.password){
         this.loginPasswordError = true
         this.password = ""
-        console.log(this.$refs.loginEmail)
         this.$refs.loginPassword.focus()
       }
-              
+
       if(localStorage.getItem('email') != this.email){
         this.loginEmailError = true
         this.email = ""
@@ -138,6 +193,7 @@ export default {
       if(!this.loginEmailError && !this.loginPasswordError){
         localStorage.setItem('user',true)
       }
+
 
       if(this.loginEmailError || this.loginPasswordError){
         this.submitting = false
@@ -168,13 +224,20 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .q-page
-    background #333
+
+  // .q-input
+  //   height 20px
+  // div.q-field.row.no-wrap.items-start.q-mb-lg.q-input.q-field--filled.q-field--float.q-field--dark.q-field--with-bottom
+  // .q-field--with-bottom > div
+  // .q-field__inner.relative-position.col.self-stretch.column.justify-center
+  //   background green!important
+  //   border 12px solid red
+
 
   .q-page>div
     width 80vw
     margin 0 auto
-  
+
   .q-page>div>div
     margin 0 auto
 
@@ -194,7 +257,6 @@ export default {
     background #337
     color white
     text-align center
-    // min-height 50vh
     min-height 370px
     min-width 80%
 
@@ -209,5 +271,27 @@ export default {
 
   .q-tab--active
     background #337;
+
+
+    // #q-app > div > div.q-page-container.q-layout__section--animate > main > div > div > div > div.q-tab-panels.q-panel-parent.shadow-5 > div > div > div > form > div.text-h6.q-ma-lg
+@media screen and (max-width: 510px)
+  .text-h6
+    margin 0
+    margin-bottom 10px
+    color white
+    font-size 1.2em
+  .q-layout__section--animate > main > div
+    margin 0
+    padding 0
+    display flex
+    // align-items center
+    justify-content center
+    width 100%
+  .q-tab-panel
+    padding 0
+    padding-bottom 0
+    max-width 300px
+
+
 </style>
 
