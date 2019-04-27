@@ -21,7 +21,7 @@ export default function (/* { ssrContext } */) {
       mtg
     },
     state: {
-      
+      test1:"man oh man"
     },
     // enable strict mode (adds overhead!)
     // for dev mode only

@@ -16,7 +16,7 @@ export default {
 
   computed: {
     products() {
-      return this.$store.stats
+      return this.$store.state.products
     }
   }
 };

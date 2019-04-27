@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 import routes from './routes'
 
+import store from '../store/index'
+
 Vue.use(VueRouter)
 
 /*
@@ -22,19 +24,20 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   })
 
-  
+
   Router.beforeEach((to, from, next) => {
 
-    
+
     const publicPages = ['/login', '/register']
     const authRequired = !publicPages.includes(to.path)
-    const loggedIn = localStorage.getItem('user')
-    console.log(to.path)
-    
+    // console.log(this.$store.user)
+    const loggedIn = true
+    // console.log(to.path)
+
     if (authRequired && !loggedIn) {
       return next('/login')
     }
-  
+
     next()
   })
 
