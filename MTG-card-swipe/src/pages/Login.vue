@@ -24,10 +24,11 @@
                   <div
                     class="text-h6 q-ma-lg">Your decks are waiting</div>
                   <q-input
+                    required
                     value=""
                     class="q-mb-lg"
                     dark
-                    v-model="email"
+                    v-model="login.email"
                     filled
                     type="email"
                     hint="Email"
@@ -39,9 +40,10 @@
                     </template>
                   </q-input>
                   <q-input
+                    required
                     value=""
                     dark
-                    v-model="password"
+                    v-model="login.password"
                     filled
                     :type="isPwd ? 'password' : 'text'"
                     hint="Password"
@@ -78,6 +80,7 @@
                 <div class="items-start">
                   <div class="text-h6 q-mb-lg">Signup to start makeing your own fantasy deck</div>
                   <q-input
+                    reqiured
                     clearable
                     value=""
                     class="q-mb-lg"
@@ -92,6 +95,7 @@
                     </template>
                   </q-input>
                   <q-input
+                    reqiured
                     value=""
                     dark
                     v-model="signup.password"
@@ -111,6 +115,7 @@
                     </template>
                   </q-input>
                   <q-input
+                    reqiured
                     value=""
                     dark
                     v-model="signup.repassword"
@@ -153,19 +158,24 @@
   </q-page>
 </template>
 <script>
+import {} from 'vuex'
 
 export default {
   name: 'PageIndex',
   data () {
     return {
       test: "Halla mundo",
-      tab: 'signup',
+      tab: 'login',
 
       isPwd: true,
 
       email: '',
       password: '',
 
+      login:{
+        email:'',
+        password:''
+      },
       signup:{
         email:'',
         password:'',
@@ -190,32 +200,26 @@ export default {
         icon: 'warning',
         message: 'ALL IS WRONG',
         position: 'bottom-right',
-        timeout: 3000
+        timeout: 4000
       })
     },
     simulateSubmit (type) {
       this.submitting = true
-      
-      // if(localStorage.getItem('password') != this.password){
-      //   this.loginPasswordError = true
-      //   this.password = ""
-      //   this.$refs.loginPassword.focus()
-      // }
 
-      // if(localStorage.getItem('email') != this.email){
-      //   this.loginEmailError = true
-      //   this.email = ""
-      //   this.$refs.loginEmail.focus()
-      // }
-
-      // if(!this.loginEmailError && !this.loginPasswordError){
-      //   localStorage.setItem('user',true)
-      // }
       if(type == 'login'){
-        
+        this.$store.dispatch('login', this.login)
       }
 
-
+      if(this.loginEmailError || this.loginPasswordError){
+        this.submitting = false
+        setTimeout(() =>{
+          this.loginEmailError = false
+          this.loginPasswordError = false
+        }, 1000)
+      }
+      setTimeout(() => {
+        this.submitting = false
+      }, 1000)
 
       if(type == 'signup'){
         const email = this.signup.email 
@@ -227,41 +231,16 @@ export default {
           if( password != ''){
             if(password.length > 5){
               if(password === repassword){
-
+                
                 // ___Make user
-                auth.createUserWithEmailAndPassword(email, password)
-                .then(cred =>{
-                  cred
-									console.log("TCL: simulateSubmit -> cred", cred)
-                })
-                .catch(err => {
-                  err
-                  this.notify(err.message)
-									console.log("TCL: simulateSubmit -> err", err)
-                })
+                this.$store.dispatch('signUp', this.signup)
+                
               }else{this.notify("Password's don't match")}  
             }else{this.notify('Pasword needs to be minimum 6 characters')}
           }else{this.notify('Missing Password')}
         }else{this.notify('Missing Email')}
       }
 
-      
-      if(this.loginEmailError || this.loginPasswordError){
-        this.submitting = false
-        setTimeout(() =>{
-          this.loginEmailError = false
-          this.loginPasswordError = false
-        }, 1000)
-      }
-
-
-
-      setTimeout(() => {
-        if(localStorage.getItem('user')){
-          this.$router.push('/')
-        }
-        this.submitting = false
-      }, 1000)
     },
     notify(msg){
       this.$q.notify({
@@ -269,15 +248,32 @@ export default {
         textColor: 'white',
         message: msg,
         position: 'bottom-right',
-        timeout: 1500
+        timeout: 3000
       })
     }
   },
+  watch: {
+    user(value){
+      if(value !== null && value !== undefined){
+        this.$router.push('/')
+      }
+    },
+    error(value){
+      if(value !== null && value !== undefined){
+        this.notify(value.message)
+      }
+    }
+  },
   created(){
-
+    
+    console.log(this.error)
     localStorage.setItem('email','bob@n.no')
     localStorage.setItem('password','123')
 
+  },
+  computed:{
+    user(){return this.$store.getters.user},
+    error(){return this.$store.getters.error},
   }
 }
 
