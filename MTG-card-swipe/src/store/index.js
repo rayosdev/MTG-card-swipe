@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // import auth from './auth'
-import { auth } from 'firebase' 
+import { auth } from 'firebase'
 
 import mtg from './modules/mtg'
 
@@ -42,6 +42,11 @@ export default function (/* { ssrContext } */) {
       SET_LOADING(state, payload){state.loading = payload},
       SET_ERROR(state, payload){state.error = payload},
       CLEAR_ERROR(state){state.error = null},
+      signout({ state }){
+        console.log("test")
+        commit('SET_USER', null)
+        this.$router.push('/')
+      }
     },
     actions: {
       // signUp({commit}, payload){
@@ -83,10 +88,8 @@ export default function (/* { ssrContext } */) {
             commit('SET_LOADING', false)
           })
       },
-      signOut({ commit }){
-        commit('SET_USER', null)
-        this.$router.push("/login")
-      }
+      
+
     },
     // enable strict mode (adds overhead!)
     // for dev mode only

@@ -26,8 +26,8 @@
       content-class=""
     >
       <q-list>
-        <q-item-label header>Essential Links</q-item-label>
-        <q-item clickable tag="a" target="_blank" href="http://v1.quasar-framework.org">
+        <q-item-label header>Navigation</q-item-label>
+        <!-- <q-item clickable tag="a" target="_blank" href="http://v1.quasar-framework.org">
           <q-item-section avatar>
             <q-icon name="school" />
           </q-item-section>
@@ -35,8 +35,17 @@
             <q-item-label>Docs</q-item-label>
             <q-item-label caption>v1.quasar-framework.org</q-item-label>
           </q-item-section>
+        </q-item> -->
+        <q-item clickable tag="a" target="_blank" @click="signout">
+          <q-item-section avatar>
+            <!-- <q-icon name="school" /> -->
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>SIGN OUT</q-item-label>
+            <q-item-label caption>v1.quasar-framework.org</q-item-label>
+          </q-item-section>
         </q-item>
-        
+
       </q-list>
     </q-drawer>
 
@@ -57,7 +66,10 @@ export default {
     }
   },
   methods: {
-    openURL
+    openURL,
+    signout(){
+      this.$store.dispatch("signOut")
+    }
   }
 }
 </script>
@@ -71,6 +83,6 @@ export default {
   color white
 .q-toolbar
   height 100%
-  
+
 
 </style>

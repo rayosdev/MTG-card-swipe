@@ -5,45 +5,15 @@
     </div>
     <q-list class="flex flex-center col row items-start q-gutter-sm">
       <q-item>
-        <q-card class="my-card">
+        <q-card class="my-card cursor-pointer" @click="selectDeck">
           <q-img
             src="https://img.scryfall.com/cards/large/en/cn2/126.jpg?1517813031"
             transition="slide-right"
             spinner-color="white"
           >
             <div class="absolute-bottom">
-              <div class="text-h6">Our Changing Planet</div>
-              <div class="text-subtitle2">by John Doe</div>
-            </div>
-          </q-img>
-        </q-card>
-      </q-item>
-
-      <q-item>
-        <q-card class="my-card">
-          <q-img
-            src="https://img.scryfall.com/cards/large/en/cn2/126.jpg?1517813031"
-            transition="slide-right"
-            spinner-color="white"
-          >
-            <div class="absolute-bottom">
-              <div class="text-h6">Our Changing Planet</div>
-              <div class="text-subtitle2">by John Doe</div>
-            </div>
-          </q-img>
-        </q-card>
-      </q-item>
-
-      <q-item>
-        <q-card class="my-card">
-          <q-img
-            src="https://img.scryfall.com/cards/large/en/cn2/126.jpg?1517813031"
-            transition="slide-right"
-            spinner-color="white"
-          >
-            <div class="absolute-bottom">
-              <div class="text-h6">Our Changing Planet</div>
-              <div class="text-subtitle2">by John Doe</div>
+              <div class="text-h6">Random Cards</div>
+              <div class="text-subtitle2">by Jared Isaksen</div>
             </div>
           </q-img>
         </q-card>
@@ -73,9 +43,13 @@ export default {
     };
   },
   methods: {
+    selectDeck(){
+      console.log("test")
+      this.$router.push("/deck")
+    },
     clear() {
-      window.localStorage.clear();
-      this.$router.push("/login");
+      window.localStorage.clear()
+      this.$router.push("/login")
     },
      prompt () {
       this.$q.dialog({
