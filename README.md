@@ -1,4 +1,3 @@
-made by Jared Anders Isaksenquasar
+# Quasar App
 
-# to run the dev server
-$ quasar dev
+> WIP

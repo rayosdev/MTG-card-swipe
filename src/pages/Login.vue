@@ -248,7 +248,7 @@ export default {
         textColor: 'white',
         message: msg,
         position: 'bottom-right',
-        timeout: 3000
+        timeout: 5000
       })
     }
   },
