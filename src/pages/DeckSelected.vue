@@ -37,9 +37,15 @@ export default {
     // }
   },
   created(){
-    axios.get('https://api.scryfall.com/cards?page=3')
+    axios.get('https://api.scryfall.com/cards/search?order=edhrec&q=o%3A%22%7BT%7D%22')
       .then(res => {
-        this.cards = res.data.data
+        let cards = res.data.data
+        cards = cards.filter(c => {
+          if(c.hasOwnProperty("image_uris") == false){return false}
+          return c.lang == "en" && c.image_uris.hasOwnProperty('large')
+        })
+        console.log(cards)
+        this.cards = cards
       })
   }
 };

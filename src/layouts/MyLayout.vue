@@ -12,7 +12,7 @@
           <q-icon name="menu" />
         </q-btn>
 
-        <q-toolbar-title>
+        <q-toolbar-title class="_top-text">
           Fantasy Deck!
         </q-toolbar-title>
 
@@ -41,8 +41,7 @@
             <!-- <q-icon name="school" /> -->
           </q-item-section>
           <q-item-section>
-            <q-item-label>SIGN OUT</q-item-label>
-            <q-item-label caption>v1.quasar-framework.org</q-item-label>
+            <q-item-label class="_link">SIGN OUT</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -84,5 +83,13 @@ export default {
 .q-toolbar
   height 100%
 
+
+//__Self defined
+
+._top-text
+  user-select none
+
+._link
+  user-select none
 
 </style>
