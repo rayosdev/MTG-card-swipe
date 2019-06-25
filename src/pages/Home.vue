@@ -21,9 +21,9 @@
     </q-list>
 
     <q-page-sticky position="bottom-right" :offset="[30, 30]">
-      <q-btn @click="prompt" fab icon="add" color="accent"/>
+      <q-btn @click="prompt" fab icon="add" color="accent" class="cursor-pointer"/>
     </q-page-sticky>
-    <q-btn color="black" id="clearBtn" @click="clear">Clear</q-btn>
+    <q-btn class="cursor-pointer" color="black" id="clearBtn" @click="clear">Clear</q-btn>
   </q-page>
 </template>
 <script>
